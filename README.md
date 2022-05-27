@@ -1,2 +1,2 @@
-# teamup
-RP2 druga zadaca
+# wordle
+wordle reimplementation
