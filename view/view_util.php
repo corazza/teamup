@@ -60,5 +60,4 @@ function print_hints($length, $hints) {
     echo '<br/>';
 }
 
-
 ?>

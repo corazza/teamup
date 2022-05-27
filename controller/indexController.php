@@ -4,7 +4,11 @@ class IndexController extends BaseController
 {
 	public function index()
 	{
-		// Samo preusmjeri na users podstranicu.
-		header('Location: ' . __SITE_URL . '/wordle.php?rt=start');
+		if (isset($_SESSION['username'])) {
+			header('Location: ' . __SITE_URL . '/teamup.php?rt=projects');
+		}
+		else {
+			header('Location: ' . __SITE_URL . '/teamup.php?rt=login');
+		}
 	}
 };

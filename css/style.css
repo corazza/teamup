@@ -8,6 +8,10 @@ table {
     text-align: center;
 }
 
+.errormessage {
+    color: red;
+}
+
 .guesscontainer {
     text-transform: uppercase;
 }

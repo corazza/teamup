@@ -1,2 +1,3 @@
-# wordle
-wordle reimplementation
+# teamup
+
+druga zadaca
