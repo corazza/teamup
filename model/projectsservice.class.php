@@ -2,8 +2,6 @@
 
 require_once __DIR__ . '/../app/database/db.class.php';
 
-
-
 class ProjectsService
 {
     public function allProjects() {
@@ -39,5 +37,18 @@ class ProjectsService
             array_push($userMap, $row);
         }
         return $userMap;
+    }
+
+    public function getProject($id) {
+        $db = DB::getConnection();
+
+        try {
+            $st = $db->prepare('SELECT * FROM dz2_projects WHERE id=:id');
+            $st->execute(array('id' => $id));
+        } catch (PDOException $e) {
+            exit('Greška u bazi: ' . $e->getMessage());
+        }
+
+        return $st->fetch();
     }
 };
