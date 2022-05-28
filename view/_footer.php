@@ -6,5 +6,7 @@ if (isset($errorMessage)) {
 }
 ?>
 
+</div>
+
 </body>
 </html>  

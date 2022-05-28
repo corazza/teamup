@@ -52,4 +52,8 @@ class LoginService
             return new LoginSuccess();
         }
     }
+
+    public function logout() {
+        unset($_SESSION['username']);
+    }
 };

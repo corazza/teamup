@@ -9,7 +9,6 @@ class LoginController extends BaseController
         $this->registry->template->title = 'Login';
         $this->registry->template->errorMessage = $error_message;
         $this->registry->template->show('login_index');
-        exit();
     }
 
     public function index()
@@ -36,4 +35,10 @@ class LoginController extends BaseController
             $this->index_with_error($login_result->error_message);
         }
     }
-};
+
+    public function logout() {
+        $ls = new LoginService();
+        $ls->logout();
+        $this->index_with_error("");
+    }
+}

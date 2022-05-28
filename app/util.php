@@ -22,6 +22,14 @@ function is_table_empty($table_name) {
 	return $st->rowCount() > 0;
 }
 
+function ifeq($first, $second, $yes, $no) {
+	if (strcmp($first, $second) === 0) {
+		return $yes;
+	} else {
+		return $no;
+	}
+}
+
 function display_error($error_message) {
 	echo "<br />";
 	echo '<p class="errormessage">' . $error_message . '</p>';
