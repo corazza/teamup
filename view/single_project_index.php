@@ -10,15 +10,9 @@
         print_project_members($project, $user_map, $members);
 
         if (strcmp($member_type, '') === 0 && strcmp($project['status'], "open") === 0) {
-            echo '<br />';
-            echo '<a class="linkbutton" href="';
-            echo __SITE_URL . "/teamup.php?rt=projects/apply&id=" . $project['id'];
-            echo '" >apply</a>';
+            print_application_button($project['id']);
         } elseif (strcmp($member_type, '') !== 0 && strcmp($member_type, 'member') !== 0) {
-            echo '<br />';
-            echo '<span class="projectmeta">';
-            echo prettify_member_type($member_type);
-            echo '</span>';
+            print_membership_type($member_type);
         }
         ?>
     </div>

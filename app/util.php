@@ -69,3 +69,10 @@ function debug()
 function considered_member($member_type) {
 	return in_array($member_type, array("member", "invitation_accepted", "application_accepted"));
 }
+
+function redirectIfNotLoggedIn()
+{
+	if (!isset($_SESSION['username'])) {
+		header('Location: ' . __SITE_URL . '/teamup.php');
+	}
+}

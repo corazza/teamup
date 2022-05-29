@@ -4,16 +4,9 @@ require_once __SITE_PATH . '/app/util.php';
 
 class ProjectsController extends BaseController
 {
-    private function redirectIfNotLoggedIn()
-    {
-        if (!isset($_SESSION['username'])) {
-            header('Location: ' . __SITE_URL . '/teamup.php');
-        }
-    }
-
     public function index()
     {
-        $this->redirectIfNotLoggedIn();
+        redirectIfNotLoggedIn();
         $ps = new ProjectsService();
         $this->registry->template->title = 'All projects';
         $this->registry->template->all_projects = $ps->allProjects();
@@ -37,13 +30,13 @@ class ProjectsController extends BaseController
 
     public function single()
     {
-        $this->redirectIfNotLoggedIn();
+        redirectIfNotLoggedIn();
         $this->show_single($_GET['id']);
     }
 
     public function my()
     {
-        $this->redirectIfNotLoggedIn();
+        redirectIfNotLoggedIn();
         $ps = new ProjectsService();
         $this->registry->template->title = 'My projects';
         $this->registry->template->my_projects = $ps->projectsForUser($_SESSION['id']);
@@ -54,7 +47,7 @@ class ProjectsController extends BaseController
 
     public function start()
     {
-        $this->redirectIfNotLoggedIn();
+        redirectIfNotLoggedIn();
         $ps = new ProjectsService();
         $this->registry->template->title = 'Start';
         $this->registry->template->my_projects = $ps->projectsForUser($_SESSION['id']);
@@ -76,7 +69,7 @@ class ProjectsController extends BaseController
 
     public function apply()
     {
-        $this->redirectIfNotLoggedIn();
+        redirectIfNotLoggedIn();
         $project_id = $_GET['id'];
         $ps = new ProjectsService();
         $ps->apply($_SESSION['id'], $project_id);

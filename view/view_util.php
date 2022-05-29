@@ -51,6 +51,16 @@ function print_project_members($project, $user_map, $members)
     echo '</div>';
 }
 
+function prettify_appinv_type($member_type) {
+    $prettified = array(
+        'application_pending' => 'application pending',
+        'application_accepted' => 'application accepted',
+        'invitation_pending' => 'invitation pending',
+        'invitation_accepted' => 'invitation accepted',
+    );
+    return $prettified[$member_type];
+}
+
 function prettify_member_type($member_type) {
     $prettified = array(
         'member' => 'member',
@@ -60,4 +70,36 @@ function prettify_member_type($member_type) {
         'invitation_accepted' => 'member',
     );
     return $prettified[$member_type];
+}
+
+function print_application_button($project_id) {
+    echo '<br />';
+    echo '<a class="linkbutton" href="';
+    echo __SITE_URL . "/teamup.php?rt=projects/apply&id=" . $project_id;
+    echo '" >apply</a>';
+}
+
+function print_accrej_button($project_id, $accrej) {
+    echo '<a class="linkbutton" href="';
+    echo __SITE_URL . '/teamup.php?rt=invitations/' . $accrej . '&id=' . $project_id;
+    echo '" >' . $accrej . '</a>';
+}
+
+function print_membership_type($member_type) {
+    echo '<br />';
+    echo '<span class="projectmeta">';
+    echo prettify_member_type($member_type);
+    echo '</span>';
+}
+
+function print_appinv_type($member_type) {
+    echo '<br />';
+    echo '<span class="projectmeta">';
+    echo prettify_appinv_type($member_type);
+    echo '</span>';
+}
+
+function print_spacer() {
+    echo '<span class="spacer">';
+    echo '</span>';
 }

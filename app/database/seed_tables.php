@@ -71,7 +71,7 @@ function seed_table_members()
 		$st->execute(array('id_project' => 4, 'id_user' => 4, 'type' => 'application_accepted')); // slavko - amazon
 		$st->execute(array('id_project' => 3, 'id_user' => 5, 'type' => 'member')); // pero - recepti
 		$st->execute(array('id_project' => 3, 'id_user' => 1, 'type' => 'application_pending')); // mirko - recepti
-		$st->execute(array('id_project' => 5, 'id_user' => 2, 'type' => 'invidation_pending')); // ana - rp2
+		$st->execute(array('id_project' => 5, 'id_user' => 2, 'type' => 'invitation_pending')); // ana - rp2
 	} catch (PDOException $e) {
 		exit("PDO error (seed_table_users): " . $e->getMessage());
 	}

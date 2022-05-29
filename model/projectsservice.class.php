@@ -15,7 +15,6 @@ class ProjectsService
             exit('DB error (ProjectsService.allProjects): ' . $e->getMessage());
         }
 
-
         $projects = array();
         while ($row = $st->fetch()) {
             array_push($projects, $row);

@@ -91,6 +91,11 @@ body {
     font-size: smaller;
 }
 
+.spacer {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
 .projectopen {
     background-color: rgba(55, 189, 53, 0.7);
 }
