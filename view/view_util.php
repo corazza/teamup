@@ -1,6 +1,7 @@
 <?php
 
-function print_project_meta($project, $user_map) {
+function print_project_meta($project, $user_map)
+{
     echo '<div class="projectmeta">';
     echo "Autor: ";
     echo ucfirst($user_map[$project['id_user']]['username']);
@@ -16,13 +17,15 @@ function print_project_meta($project, $user_map) {
     echo '</div>';
 }
 
-function print_project_title($project) {
+function print_project_title($project)
+{
     echo '<div class="projecttitle">';
     echo $project['title'];
     echo "</div>";
 }
 
-function print_project_description($project) {
+function print_project_description($project)
+{
     echo '<div class="projectmeta upperspace">';
     echo "Description";
     echo '</div>';
@@ -31,13 +34,19 @@ function print_project_description($project) {
     echo '</div>';
 }
 
-function print_project_members($project, $user_map) {
+function print_project_members($project, $user_map, $members)
+{
     echo '<div class="projectmeta upperspace">';
-    echo "Description";
+    echo "Members";
     echo '</div>';
     echo '<div>';
-    echo $project['abstract'];
+    $num_members = count($members);
+    if ($num_members > 1) {
+        for ($i = 0; $i < $num_members-1; ++$i) {
+            echo ucfirst($user_map[$members[$i]]['username']);
+            echo ", ";
+        }
+    }
+    echo ucfirst($user_map[$members[$num_members - 1]]['username']);
     echo '</div>';
 }
-
-?>

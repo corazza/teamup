@@ -9,11 +9,11 @@ require_once __SITE_PATH . '/app/util.php';
     </div>
 
     <div class="menubutton <?php echo ifeq($title, 'My projects', 'underlined', ''); ?>">
-        <a class="menubuttonlink <?php echo ifeq($title, 'My projects', 'onlink', ''); ?>" href="<?php echo __SITE_URL; ?>/teamup.php?rt=projects">My projects</a>
+        <a class="menubuttonlink <?php echo ifeq($title, 'My projects', 'onlink', ''); ?>" href="<?php echo __SITE_URL; ?>/teamup.php?rt=projects/my">My projects</a>
     </div>
 
     <div class="menubutton <?php echo ifeq($title, 'Start', 'underlined', ''); ?>">
-        <a class="menubuttonlink <?php echo ifeq($title, 'Start', 'onlink', ''); ?>" href="<?php echo __SITE_URL; ?>/teamup.php?rt=projects">Start</a>
+        <a class="menubuttonlink <?php echo ifeq($title, 'Start', 'onlink', ''); ?>" href="<?php echo __SITE_URL; ?>/teamup.php?rt=projects/start">Start a new project</a>
     </div>
 
 </div>

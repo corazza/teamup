@@ -6,6 +6,7 @@
         <?php print_project_meta($project, $user_map) ?>
         <?php print_project_title($project) ?>
         <?php print_project_description($project) ?>
+        <?php print_project_members($project, $user_map, $members) ?>
     </div>
 </div>
 

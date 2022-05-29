@@ -2,27 +2,34 @@
 
 require_once __DIR__ . '/database/db.class.php';
 
-function read_from_aux($filename) {
+function read_from_aux($filename)
+{
 	$filename = __DIR__ . '/../aux/' . $filename;
 	return file_get_contents($filename);
 }
 
-function words_table_name($length) {
+function words_table_name($length)
+{
 	return "words_" . $length;
 }
 
-function is_table_empty($table_name) {
+function is_table_empty($table_name)
+{
 	$db = DB::getConnection();
 
-	$st = $db->prepare(
-		'SHOW TABLES LIKE :tblname'
-	);
+	try {
+		$st = $db->prepare('SELECT COUNT(1) WHERE EXISTS (SELECT * FROM ' . $table_name . ')');
+		$st->execute(array());
+	} catch (PDOException $e) {
+		exit("PDO error (is_table_empty): " . $e->getMessage());
+	}
 
-	$st->execute( array( 'tblname' => $table_name ) );
-	return $st->rowCount() > 0;
+	$row = $st->fetch();
+	return intval($row[0]) === 0;
 }
 
-function ifeq($first, $second, $yes, $no) {
+function ifeq($first, $second, $yes, $no)
+{
 	if (strcmp($first, $second) === 0) {
 		return $yes;
 	} else {
@@ -30,13 +37,15 @@ function ifeq($first, $second, $yes, $no) {
 	}
 }
 
-function display_error($error_message) {
+function display_error($error_message)
+{
 	echo "<br />";
 	echo '<p class="errormessage">' . $error_message . '</p>';
-	echo "<br />";	
+	echo "<br />";
 }
 
-function debug() {
+function debug()
+{
 	echo "<br />";
 	echo "<br />";
 	echo "<hr />";
@@ -56,5 +65,3 @@ function debug() {
 	print_r($_GET);
 	echo "<br />";
 }
-
-?>

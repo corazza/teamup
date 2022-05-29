@@ -33,7 +33,7 @@ class LoginService
         $db = DB::getConnection();
 
         try {
-            $st = $db->prepare('SELECT username, password_hash, has_registered FROM dz2_users WHERE username=:username');
+            $st = $db->prepare('SELECT id, username, password_hash, has_registered FROM dz2_users WHERE username=:username');
             $st->execute(array('username' => $_POST['username']));
         } catch (PDOException $e) {
             exit('Greška u bazi: ' . $e->getMessage());
@@ -49,6 +49,7 @@ class LoginService
             return new LoginFailure('Lozinka nije ispravna.');
         } else {
             $_SESSION['username'] = $_POST['username'];
+            $_SESSION['id'] = $row['id'];
             return new LoginSuccess();
         }
     }
