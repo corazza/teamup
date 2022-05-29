@@ -80,8 +80,16 @@ function print_application_button($project_id) {
 }
 
 function print_accrej_button($project_id, $accrej) {
+    $appinv = "invitations";
     echo '<a class="linkbutton" href="';
-    echo __SITE_URL . '/teamup.php?rt=invitations/' . $accrej . '&id=' . $project_id;
+    echo __SITE_URL . '/teamup.php?rt=' . $appinv . '/' . $accrej . '&id=' . $project_id;
+    echo '" >' . $accrej . '</a>';
+}
+
+function print_accrej_button_applications($project_id, $user_id, $accrej) {
+    $appinv = "applications";
+    echo '<a class="linkbutton" href="';
+    echo __SITE_URL . '/teamup.php?rt=' . $appinv . '/' . $accrej . '&project_id=' . $project_id . '&user_id=' . $user_id;
     echo '" >' . $accrej . '</a>';
 }
 

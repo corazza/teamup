@@ -20,10 +20,12 @@ class LoginController extends BaseController
     {
         if (!isset($_POST['username']) || !isset($_POST['password']) || strlen($_POST['username']) == 0 || strlen($_POST['password']) == 0) {
             $this->index_with_error('Upisite ime i lozinku');
+            exit();
         }
 
         if (!preg_match('/^[a-zA-Z]{3,10}$/', $_POST['username'])) {
             $this->index_with_error('Korisničko ime treba imati između 3 i 10 slova.');
+            exit();
         }
 
         $ls = new LoginService();

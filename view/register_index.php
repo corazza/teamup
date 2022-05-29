@@ -5,7 +5,7 @@
 <br />
 
 
-<form method="post" action="<?php echo __SITE_URL . '/teamup.php?rt=login/attempt' ?>">
+<form method="post" action="<?php echo __SITE_URL . '/teamup.php?rt=register/attempt' ?>">
     <ul class="form-style-1">
         <li>
             <label>username</label>
@@ -15,13 +15,12 @@
             <label>password</label>
             <input type="password" name="password" class="field-long" />
         </li>
-
         <li>
-            <input class="linkbutton" type="submit" value="login" />
+            <label>email</label>
+            <input type="email" name="email" class="field-long" />
         </li>
-
         <li>
-            <a class="linkbutton" href="<?php echo __SITE_URL . '/teamup.php?rt=register' ?>"> registration page </a>
+            <input class="linkbutton" type="submit" value="register" />
         </li>
     </ul>
 </form>

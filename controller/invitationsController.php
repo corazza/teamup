@@ -19,11 +19,14 @@ class InvitationsController extends BaseController
     public function accept() {
         redirectIfNotLoggedIn();
         $ais = new AppInvService();
-        $ais->accept(intval($_GET['id']), intval($_SESSION['id']));
+        $ais->accept_appinv(intval($_GET['id']), intval($_SESSION['id']), 'invitation');
         header('Location: ' . __SITE_URL . '/teamup.php?rt=invitations');
     }
 
     public function reject() {
-        
+        redirectIfNotLoggedIn();
+        $ais = new AppInvService();
+        $ais->reject_appinv(intval($_GET['id']), intval($_SESSION['id']), 'invitation');
+        header('Location: ' . __SITE_URL . '/teamup.php?rt=invitations');        
     }
 };

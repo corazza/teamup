@@ -13,12 +13,14 @@ foreach ($all_projects_invited as $project) {
     print_project_title($project);
     print_appinv_type($project['member_type']);
 
-    echo '<br/>';
-    echo '<br/>';
-
-    print_accrej_button($project['id'], 'accept');
-    print_spacer();
-    print_accrej_button($project['id'], 'reject');
+    if (strcmp($project['member_type'], "invitation_pending") === 0) {
+        echo '<br/>';
+        echo '<br/>';
+    
+        print_accrej_button($project['id'], 'accept');
+        print_spacer();
+        print_accrej_button($project['id'], 'reject');
+    }
 
     echo "</div>";
 }

@@ -38,8 +38,12 @@ class ProjectsController extends BaseController
     {
         redirectIfNotLoggedIn();
         $ps = new ProjectsService();
+        $as = new AppInvService();
         $this->registry->template->title = 'My projects';
         $this->registry->template->my_projects = $ps->projectsForUser($_SESSION['id']);
+        $applications = $as->applicationsForUser($_SESSION['id']);
+        $this->registry->template->applications = $applications[0];
+        $this->registry->template->project_has_applications = $applications[1];
         $this->registry->template->user_map = $ps->userMap();
         $this->registry->template->username = $_SESSION['username'];
         $this->registry->template->show('my_projects_index');
