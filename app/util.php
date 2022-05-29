@@ -18,14 +18,15 @@ function is_table_empty($table_name)
 	$db = DB::getConnection();
 
 	try {
-		$st = $db->prepare('SELECT COUNT(1) WHERE EXISTS (SELECT * FROM ' . $table_name . ')');
-		$st->execute(array());
+		$st = $db->prepare('SELECT count(*) FROM ' . $table_name);
+		$st->execute();
+	
+		$r = intval($st->fetchColumn());
+		
+		return $r === 0;
 	} catch (PDOException $e) {
 		exit("PDO error (is_table_empty): " . $e->getMessage());
 	}
-
-	$row = $st->fetch();
-	return intval($row[0]) === 0;
 }
 
 function ifeq($first, $second, $yes, $no)
