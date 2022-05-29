@@ -24,6 +24,11 @@ body {
     margin-bottom: 0.5em;
 }
 
+.textcontent {
+    max-width: 30em;
+    overflow-wrap: break-word;
+}
+
 .clickable {
     position: absolute;
     width: 100%;
@@ -35,10 +40,6 @@ body {
 
     /* background-image: url('empty.gif'); */
 }
-
-/* .logoutbutton {
-    margin-left: 0.5em;
-} */
 
 .maincontainer {
     margin: 1em;

@@ -22,17 +22,23 @@ class ProjectsController extends BaseController
         $this->registry->template->show('projects_index');
     }
 
-    public function single()
-    {
-        $this->redirectIfNotLoggedIn();
-        $project_id = $_GET['id'];
+    private function show_single($project_id) {
+        $ps = new ProjectsService();
+        $user_id = $_SESSION['id'];
         $ps = new ProjectsService();
         $this->registry->template->title = 'Single project';
         $this->registry->template->project = $ps->getProject($project_id);
         $this->registry->template->user_map = $ps->userMap();
         $this->registry->template->members = $ps->members($project_id);
+        $this->registry->template->member_type = $ps->memberType($project_id, $user_id);
         $this->registry->template->username = $_SESSION['username'];
         $this->registry->template->show('single_project_index');
+    }
+
+    public function single()
+    {
+        $this->redirectIfNotLoggedIn();
+        $this->show_single($_GET['id']);
     }
 
     public function my()
@@ -55,8 +61,10 @@ class ProjectsController extends BaseController
         $this->registry->template->user_map = $ps->userMap();
         $this->registry->template->username = $_SESSION['username'];
 
-        if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['members'])
-             && strlen($_POST['name']) > 0 && strlen($_POST['description']) > 0 && strlen($_POST['members']) > 0) {
+        if (
+            isset($_POST['name']) && isset($_POST['description']) && isset($_POST['members'])
+            && strlen($_POST['name']) > 0 && strlen($_POST['description']) > 0 && strlen($_POST['members']) > 0
+        ) {
             $ps->startProject($_SESSION['id'], $_POST['name'], $_POST['description'], $_POST['members']);
             header('Location: ' . __SITE_URL . '/teamup.php?rt=projects/my');
         } elseif (isset($_POST['name']) || isset($_POST['description']) || isset($_POST['members'])) {
@@ -64,5 +72,14 @@ class ProjectsController extends BaseController
         }
 
         $this->registry->template->show('start_new_index');
+    }
+
+    public function apply()
+    {
+        $this->redirectIfNotLoggedIn();
+        $project_id = $_GET['id'];
+        $ps = new ProjectsService();
+        $ps->apply($_SESSION['id'], $project_id);
+        header('Location: ' . __SITE_URL . '/teamup.php?rt=projects/single&id=' . $project_id);
     }
 };

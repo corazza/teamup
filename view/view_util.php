@@ -29,7 +29,7 @@ function print_project_description($project)
     echo '<div class="projectmeta upperspace">';
     echo "Description";
     echo '</div>';
-    echo '<div>';
+    echo '<div class="textcontent">';
     echo $project['abstract'];
     echo '</div>';
 }
@@ -49,4 +49,15 @@ function print_project_members($project, $user_map, $members)
     }
     echo ucfirst($user_map[$members[$num_members - 1]]['username']);
     echo '</div>';
+}
+
+function prettify_member_type($member_type) {
+    $prettified = array(
+        'member' => 'member',
+        'application_pending' => 'application pending',
+        'application_accepted' => 'member',
+        'invitation_pending' => 'invitation pending',
+        'invitation_accepted' => 'member',
+    );
+    return $prettified[$member_type];
 }

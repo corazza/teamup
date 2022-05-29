@@ -12,7 +12,7 @@ class ProjectsService
             $st = $db->prepare('SELECT * FROM dz2_projects');
             $st->execute(array());
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.allProjects): ' . $e->getMessage());
         }
 
 
@@ -35,7 +35,7 @@ class ProjectsService
                 OR dz2_members.member_type = "application_accepted"))');
             $st->execute(array('user_id' => $user_id));
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.projectsForUser): ' . $e->getMessage());
         }
 
         $projects = array();
@@ -53,7 +53,7 @@ class ProjectsService
             $st = $db->prepare('SELECT * FROM dz2_projects WHERE id=:id');
             $st->execute(array('id' => $id));
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.getProject): ' . $e->getMessage());
         }
 
         return $st->fetch();
@@ -67,7 +67,7 @@ class ProjectsService
             $st = $db->prepare('SELECT id, username FROM dz2_users');
             $st->execute(array());
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.userMap): ' . $e->getMessage());
         }
 
         $userMap = array();
@@ -88,7 +88,7 @@ class ProjectsService
                 OR member_type = "application_accepted")');
             $st->execute(array('id_project' => $project_id));
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.members): ' . $e->getMessage());
         }
 
         $members = array();
@@ -109,7 +109,39 @@ class ProjectsService
             $st = $db->prepare('INSERT INTO dz2_members (id_project, id_user, member_type) VALUES (:id_project, :id_user, "member")');
             $st->execute(array('id_project' => $last_project_id, 'id_user' => $author_id));
         } catch (PDOException $e) {
-            exit('Greška u bazi: ' . $e->getMessage());
+            exit('DB error (ProjectsService.startProject): ' . $e->getMessage());
+        }
+    }
+
+    public function memberType($project_id, $user_id) {
+        $db = DB::getConnection();
+
+        try {
+            $st = $db->prepare('SELECT member_type FROM dz2_members WHERE id_user=:user_id AND id_project=:project_id');
+            $st->execute(array('project_id' => $project_id, 'user_id' => $user_id));
+        } catch (PDOException $e) {
+            exit('DB error (ProjectsService.memberType): ' . $e->getMessage());
+        }
+
+        $row = $st->fetch();
+        if ($row === false) {
+            $row = array(0 => "");
+        }
+        return $row[0];
+    }
+
+    public function apply($user_id, $project_id) {
+        $db = DB::getConnection();
+
+        echo $user_id;
+        echo $project_id;
+
+        try {
+            $st = $db->prepare('INSERT INTO dz2_members (id_user, id_project, member_type)
+                    VALUES (:user_id, :project_id, "application_pending")');
+            $st->execute(array('user_id' => $user_id, 'project_id' => $project_id));
+        } catch (PDOException $e) {
+            exit('DB error (ProjectsService.startProject): ' . $e->getMessage());
         }
     }
 };

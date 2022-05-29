@@ -65,3 +65,7 @@ function debug()
 	print_r($_GET);
 	echo "<br />";
 }
+
+function considered_member($member_type) {
+	return in_array($member_type, array("member", "invitation_accepted", "application_accepted"));
+}
